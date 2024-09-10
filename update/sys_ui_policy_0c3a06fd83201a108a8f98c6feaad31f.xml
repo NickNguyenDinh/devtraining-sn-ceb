@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ui_policy">
     <sys_ui_policy action="INSERT_OR_UPDATE">
         <active>true</active>
-        <conditions table="x_58872_needit_needit">assigned_groupISEMPTY^assigned_toISNOTEMPTY^EQ<item endquery="false" field="assigned_group" goto="false" newquery="false" operator="ISEMPTY" or="false" value=""/>
-            <item endquery="false" field="assigned_to" goto="false" newquery="false" operator="ISNOTEMPTY" or="false" value=""/>
+        <conditions table="x_58872_needit_needit">assigned_toISNOTEMPTY^assigned_groupISEMPTY^EQ<item endquery="false" field="assigned_to" goto="false" newquery="false" operator="ISNOTEMPTY" or="false" value=""/>
+            <item endquery="false" field="assigned_group" goto="false" newquery="false" operator="ISEMPTY" or="false" value=""/>
             <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
         </conditions>
         <description/>
@@ -16,30 +16,30 @@
         <reverse_if_false>true</reverse_if_false>
         <run_scripts>true</run_scripts>
         <script_false><![CDATA[function onCondition() {
-
+	g_form.setMandatory('assigned_group',false);
 }]]></script_false>
         <script_true><![CDATA[function onCondition() {
-
+	g_form.setMandatory('assigned_group',true);
 }]]></script_true>
         <set_values/>
-        <short_description>Assign user group if blank</short_description>
+        <short_description>NeedIt Enforce Assigned_Group if Assigned_To is defined</short_description>
         <sys_class_name>sys_ui_policy</sys_class_name>
         <sys_created_by>admin</sys_created_by>
-        <sys_created_on>2024-09-10 14:28:38</sys_created_on>
+        <sys_created_on>2024-09-10 17:44:33</sys_created_on>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
-        <sys_id>703d55b98360d6108a8f98c6feaad3f1</sys_id>
+        <sys_id>0c3a06fd83201a108a8f98c6feaad31f</sys_id>
         <sys_mod_count>1</sys_mod_count>
-        <sys_name>Assign user group if blank</sys_name>
+        <sys_name>NeedIt Enforce Assigned_Group if Assigned_To is defined</sys_name>
         <sys_overrides/>
         <sys_package display_value="NeedIt" source="x_58872_needit">6ead8e780f603200cd674f8ce1050ed1</sys_package>
         <sys_policy/>
         <sys_scope display_value="NeedIt">6ead8e780f603200cd674f8ce1050ed1</sys_scope>
-        <sys_update_name>sys_ui_policy_703d55b98360d6108a8f98c6feaad3f1</sys_update_name>
+        <sys_update_name>sys_ui_policy_0c3a06fd83201a108a8f98c6feaad31f</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2024-09-10 14:29:15</sys_updated_on>
+        <sys_updated_on>2024-09-10 17:46:12</sys_updated_on>
         <table>x_58872_needit_needit</table>
-        <ui_type>10</ui_type>
+        <ui_type>0</ui_type>
         <view/>
     </sys_ui_policy>
 </record_update>
