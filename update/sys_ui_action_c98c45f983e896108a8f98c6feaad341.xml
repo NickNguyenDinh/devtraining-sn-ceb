@@ -35,25 +35,31 @@
 function parseCheckedList() {
 	var currNo = '';
 	var tblName = '';
-	var currUserID ='';
-	var whenNeeded = new GlideDateTime();
+	var currUserID = '';
+	var url ='https://dev276507.service-now.com/now/nav/ui/classic/params/target/x_58872_needit_needit_list.do%3Fsysparm_first_row%3D1%26sysparm_query%3Du_requested_for%253D0a826bf03710200044e0bfc8bcbe5d7a%26sysparm_view%3D';
+	//var whenNeeded = new GlideDateTime();
 
 	try {
 		currNo = current.number;
 		tblName = current.getTableName();
 		currUserID = gs.getUserID();
-		whenNeeded.getLocalDate();
-		whenNeeded.addDaysLocalTime(1);
-	
+		//whenNeeded.getLocalDate();
+		//whenNeeded.addDaysLocalTime(1);
 
-		var gr =  new GlideRecord(tblName);
-		gr.get('number',currNo);
-		gr.assigned_to = gs.getUser();
-		gs.getUserByID();
+		//var gr = new GlideRecord(tblName);
+		//gr.get('number',currNo);
+		//gr.assigned_to = currUserID;
+		//gr.u_when_needed = whenNeeded;
+		//gr.update();
 
-		gr.u_when_needed = whenNeeded;
-		gr.update();
-		gs.info('Updated: ' + tblName + '; ' + currNo + '; ' + currUserID + '; ' + whenNeeded);
+		current.assigned_to = currUserID;
+		current.state = 10;
+		current.update();
+
+		gs.addInfoMessage('Record(' + currNo +  ') has been assigned to ' + gs.getUserDisplayName());
+		action.setRedirectURL(url);
+
+		//gs.info('Updated: ' + tblName + '; ' + currNo + '; ' + currUserID);
 	}
 	catch (err) {
 		gs.error('Error: ' + err);
@@ -70,7 +76,7 @@ function parseCheckedList() {
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>c98c45f983e896108a8f98c6feaad341</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>7</sys_mod_count>
         <sys_name>Assign to Me</sys_name>
         <sys_overrides/>
         <sys_package display_value="NeedIt" source="x_58872_needit">6ead8e780f603200cd674f8ce1050ed1</sys_package>
@@ -78,9 +84,9 @@ function parseCheckedList() {
         <sys_scope display_value="NeedIt">6ead8e780f603200cd674f8ce1050ed1</sys_scope>
         <sys_update_name>sys_ui_action_c98c45f983e896108a8f98c6feaad341</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2024-09-10 13:21:00</sys_updated_on>
+        <sys_updated_on>2024-09-10 14:29:36</sys_updated_on>
         <table>x_58872_needit_needit</table>
         <ui11_compatible>true</ui11_compatible>
-        <ui16_compatible>false</ui16_compatible>
+        <ui16_compatible>true</ui16_compatible>
     </sys_ui_action>
 </record_update>
