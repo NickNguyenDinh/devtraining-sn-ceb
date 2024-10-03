@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_58872_needit.TimeLimitAjaxUtils</api_name>
+        <caller_access/>
+        <client_callable>true</client_callable>
+        <description>Defines Ajax methods for interacting with Time Limited table</description>
+        <name>TimeLimitAjaxUtils</name>
+        <script><![CDATA[var TimeLimitAjaxUtils = Class.create();
+// Extend the global.AbstractAjaxProcessor class
+TimeLimitAjaxUtils.prototype = Object.extendsObject(global.AbstractAjaxProcessor,{
+    getAllMembers: function() {
+		return 'This is my response';
+
+		var gr = new GlideRecord("sys_user_has_role_time_limited");
+		//gr.addQuery('active', 'true');
+		//gr.addQuery('user.active', 'true');
+		//gr.addQuery('end_time','>=', new GlideDateTime().getLocalDate());
+		gr.addEncodedQuery('active=true^user.active=true^end_timeISEMPTY^ORend_time>=javascript:gs.beginningOfToday()');
+
+		var rowCount = 0;
+		var oMem = {};
+		var aMem = [];
+		while (gr.next()) {
+			//Concatenate to JSON elements
+			//Rename to _date as table does not include time
+			rowCount = rowCount + 1;
+			oMem = {"member": gr.user + "",
+					"start_date": gr.start_time.getLocalDate() + "",
+					"end_date": gr.end_time.getLocalDate() + ""
+				};
+			aMem.push(oMem);
+		}
+		//return {"rowCount": rowCount, "mrvs": JSON.stringify(aMem)};
+		return JSON.stringify(aMem);
+
+	}, 
+
+    type: 'TimeLimitAjaxUtils'
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-10-02 19:07:11</sys_created_on>
+        <sys_id>b2bc2b78830d12508a8f98c6feaad3c3</sys_id>
+        <sys_mod_count>10</sys_mod_count>
+        <sys_name>TimeLimitAjaxUtils</sys_name>
+        <sys_package display_value="NeedIt" source="x_58872_needit">6ead8e780f603200cd674f8ce1050ed1</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="NeedIt">6ead8e780f603200cd674f8ce1050ed1</sys_scope>
+        <sys_update_name>sys_script_include_b2bc2b78830d12508a8f98c6feaad3c3</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-10-03 15:56:44</sys_updated_on>
+    </sys_script_include>
+</record_update>
